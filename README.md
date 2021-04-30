@@ -1,4 +1,4 @@
-# hagglex
+# HaggleX
 
 HaggleX - Recreated Flutter Application
 
