@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hagglex/core/constants/app_assets.dart';
 import 'package:hagglex/core/share_ui/shared/app_colors.dart';
+import 'package:hagglex/core/share_ui/shared/ui_helpers.dart';
 
 class StartupPage extends StatelessWidget {
   const StartupPage({Key key}) : super(key: key);
@@ -9,36 +10,39 @@ class StartupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      body: Stack(
-        children: [
-          Image.asset(
-            AppAssets.backgroundImage,
-            fit: BoxFit.cover,
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.center,
-          ),
-          Center(
-            child: Image.asset(
-              AppAssets.appLogoImage,
-              width: 50,
-              height: 50,
+      body: SizedBox.expand(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                const Color(0xFF2E1963),
+                const Color(0xFF402B75),
+                const Color(0xFF271160),
+              ],
+              begin: const FractionalOffset(0.0, 0.4),
+              end: const FractionalOffset(1.0, 0.0),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 110.0),
-            child: Center(
-              child: Text(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                AppAssets.appLogoImage,
+                width: 50,
+                height: 50,
+              ),
+              verticalSpaceSmall,
+              Text(
                 'HaggleX',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 27,
                   fontWeight: FontWeight.w900,
                 ),
-              ),
-            ),
-          )
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
