@@ -23,19 +23,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  another_flushbar: ^1.10.11
+  connectivity: ^3.0.3
   cupertino_icons: ^1.0.2
+  dartz: ^0.9.2
+  data_connection_checker: ^0.3.4
+  dio: ^3.0.10
+  equatable: ^2.0.0
+  flutter_dotenv: ^3.1.0
+  flutter_secure_storage: ^4.1.0
+  flutter_svg: ^0.21.0+1
+  gap: ^1.2.0
+  get_it: ^4.0.1
+  intl: ^0.17.0
+  logger: ^0.9.4
+  pedantic: ^1.11.0
+  provider: ^4.3.2+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^5.0.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -44,17 +55,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
+  assets:
+    - assets/images/
+    - assets/icons/
+    - .env
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
