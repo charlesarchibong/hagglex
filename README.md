@@ -1,6 +1,6 @@
 # HaggleX
 
-HaggleX - Recreated Flutter Application
+[HaggleX](https://www.hagglex.com/) - Recreated Flutter Application
 
 
 ## Features
