@@ -1,16 +1,22 @@
 # hagglex
 
-A new Flutter application.
+HaggleX - Recreated Flutter Application
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
+- Login and Logout
+- Register
+- Email Verification
 
-A few resources to get you started if this is your first Flutter project:
+## Tools
+- Flutter
+- GraphQL
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Architecture
+ - Clean architecture with Test Driven Design (TDD)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Developer
+### Charles Archibong
+- [contact@charlesarchibong.dev](mailto:contact@charlesarchibong.dev)
+- [LinkedIn](https://www.linkedin.com/in/charles-archibong)
+- [GitHub](https://github.com/charlesarchibong/)
