@@ -1,4 +1,4 @@
 class AppAssets {
-  static const String welcomeScreenIcons =
-      'assets/icons/welcome_screen_icon.svg';
+  static const String backgroundImage = 'assets/images/background_image.png';
+  static const String appLogoImage = 'assets/icons/app_logo.png';
 }

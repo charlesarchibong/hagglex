@@ -3,8 +3,6 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hagglex/core/interceptors/dio_connectivity_request_retrier.dart';
-import 'package:hagglex/core/interceptors/retry_request_interceptor.dart';
 import 'package:hagglex/core/local_data/user_data/delete_user_session.dart';
 import 'package:hagglex/core/local_data/user_token/get_user_logged_in_token.dart';
 import 'package:hagglex/core/local_data/user_token/set_user_logged_in_token.dart';
@@ -31,21 +29,9 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton(
     () => HttpServiceRequester(
       dio: sl(),
-      retryOnConnectionChangeInterceptor: sl(),
-    ),
-  );
-  sl.registerLazySingleton(
-    () => RetryOnConnectionChangeInterceptor(
-      requestRetrier: sl(),
     ),
   );
 
-  sl.registerLazySingleton(
-    () => DioConnectivityRequestRetrier(
-      connectivity: sl(),
-      dio: sl(),
-    ),
-  );
   sl.registerLazySingleton(
     () => Connectivity(),
   );

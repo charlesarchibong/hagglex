@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hagglex/core/navigations/route_paths.dart';
+import 'package:hagglex/features/user/presentation/pages/startup_page.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case Routes.startUpPage:
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: Scaffold(
-          body: Center(
-            child: Text('Start up view'),
-          ),
-        ),
+        viewToShow: StartupPage(),
       );
 
     default:

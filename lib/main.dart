@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hagglex/core/navigations/navigation_service.dart';
 import 'package:hagglex/core/navigations/route_generator.dart';
 import 'package:hagglex/core/navigations/route_paths.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: MaterialColor(
           0xff2E1963,
           AppColors.colorScratch,
+        ),
+        textTheme: GoogleFonts.darkerGrotesqueTextTheme(
+          Theme.of(context).textTheme,
         ),
       ),
       initialRoute: Routes.startUpPage,

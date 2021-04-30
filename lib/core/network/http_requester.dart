@@ -2,16 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hagglex/core/constants/env_constants.dart';
-import 'package:hagglex/core/interceptors/retry_request_interceptor.dart';
 import 'package:logger/logger.dart';
 
 class HttpServiceRequester {
   final Dio dio;
-  final RetryOnConnectionChangeInterceptor retryOnConnectionChangeInterceptor;
 
   HttpServiceRequester({
     @required this.dio,
-    @required this.retryOnConnectionChangeInterceptor,
   });
 
   Future<Response> post({
@@ -21,8 +18,6 @@ class HttpServiceRequester {
     @required String contentType,
     Map queryParam,
   }) async {
-    dio.interceptors.add(retryOnConnectionChangeInterceptor);
-
     dio.options.headers['Authorization'] = 'Bearer $token';
 
     Logger().i(env[baseUrlEnv] + endpoint);
@@ -43,7 +38,6 @@ class HttpServiceRequester {
   Future<dynamic> getRequest({@required String endpoint, String token
       // Map queryParam,
       }) async {
-    dio.interceptors.add(retryOnConnectionChangeInterceptor);
     // Options _cacheOptions = buildCacheOptions(
     //   Duration(
     //     seconds: 40,
