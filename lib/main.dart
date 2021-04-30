@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:hagglex/core/navigations/navigation_service.dart';
 import 'package:hagglex/core/navigations/route_generator.dart';
 import 'package:hagglex/core/navigations/route_paths.dart';
+import 'package:hagglex/core/share_ui/shared/app_colors.dart';
 import 'package:hagglex/injection_container.dart';
 
 void main() async {
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
       title: 'HaggleX',
       navigatorKey: sl<NavigationService>().key,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: MaterialColor(
+          0xff2E1963,
+          AppColors.colorScratch,
+        ),
       ),
       initialRoute: Routes.startUpPage,
       onGenerateRoute: generateRoute,

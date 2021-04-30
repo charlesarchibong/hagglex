@@ -10,15 +10,15 @@ class AppColors {
   static const Color gray = Color(0xffBDBDBD);
   static const Color green = Color(0xff067E04);
   static const Map<int, Color> colorScratch = {
-    50: Color.fromRGBO(16, 25, 36, .1),
-    100: Color.fromRGBO(16, 25, 36, .2),
-    200: Color.fromRGBO(16, 25, 36, .3),
-    300: Color.fromRGBO(16, 25, 36, .4),
-    400: Color.fromRGBO(16, 25, 36, .5),
-    500: Color.fromRGBO(16, 25, 36, .6),
-    600: Color.fromRGBO(16, 25, 36, .7),
-    700: Color.fromRGBO(16, 25, 36, .8),
-    800: Color.fromRGBO(16, 25, 36, .9),
-    900: Color.fromRGBO(16, 25, 36, 1),
+    50: Color.fromRGBO(46, 25, 99, .1),
+    100: Color.fromRGBO(46, 25, 99, .2),
+    200: Color.fromRGBO(46, 25, 99, .3),
+    300: Color.fromRGBO(46, 25, 99, .4),
+    400: Color.fromRGBO(46, 25, 99, .5),
+    500: Color.fromRGBO(46, 25, 99, .6),
+    600: Color.fromRGBO(46, 25, 99, .7),
+    700: Color.fromRGBO(46, 25, 99, .8),
+    800: Color.fromRGBO(46, 25, 99, .9),
+    900: Color.fromRGBO(46, 25, 99, 1),
   };
 }
