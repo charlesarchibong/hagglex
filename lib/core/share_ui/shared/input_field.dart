@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hagglex/core/share_ui/shared/note_text.dart';
 import 'package:hagglex/core/share_ui/shared/ui_helpers.dart';
 
-import 'app_colors.dart';
+import 'note_text.dart';
 
 class InputField extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType textInputType;
   final bool password;
   final bool isReadOnly;
-  final String placeholder;
   final String validationMessage;
   final Function enterPressed;
   final bool smallVersion;
@@ -24,18 +22,16 @@ class InputField extends StatefulWidget {
   final int maxLines, maxLength;
   final Widget suffix;
   final Widget prefix;
-  final Color validationColor;
 
   InputField({
     @required this.controller,
-    @required this.placeholder,
     @required this.label,
     this.enterPressed,
     this.fieldFocusNode,
     this.nextFocusNode,
     this.additionalNote,
     this.onChanged,
-    this.formatter,
+    this.formatter = const [],
     this.maxLength,
     this.maxLines = 1,
     this.validationMessage,
@@ -44,9 +40,8 @@ class InputField extends StatefulWidget {
     this.password = false,
     this.isReadOnly = false,
     this.smallVersion = true,
-    this.suffix,
+    this.suffix = const SizedBox(),
     this.prefix,
-    this.validationColor = AppColors.accent,
   });
 
   @override
@@ -70,78 +65,73 @@ class _InputFieldState extends State<InputField> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-          height: widget.smallVersion ? 60 : 113,
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            border: Border.all(color: widget.validationColor),
-            borderRadius: BorderRadius.circular(5),
-          ),
+          height: widget.smallVersion ? 70 : 113,
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               widget.prefix ?? SizedBox(),
-              horizontalSpaceSmall,
               Expanded(
-                child: TextField(
+                child: TextFormField(
                   controller: widget.controller,
                   keyboardType: widget.textInputType,
                   focusNode: widget.fieldFocusNode,
                   textInputAction: widget.textInputAction,
                   onChanged: widget.onChanged,
-
-                  inputFormatters: widget.formatter ?? [],
+                  maxLength: widget.maxLength,
+                  maxLines: widget.maxLines,
+                  inputFormatters: widget.formatter,
                   onEditingComplete: () {
                     if (widget.enterPressed != null) {
                       FocusScope.of(context).requestFocus(FocusNode());
                       widget.enterPressed();
                     }
                   },
-                  // onFieldSub                                                                                                         mitted: (value) {
-                  //   if (widget.nextFocusNode != null) {
-                  //     widget.nextFocusNode.requestFocus();
-                  //   }
-                  // },
+                  onFieldSubmitted: (value) {
+                    if (widget.nextFocusNode != null) {
+                      widget.nextFocusNode.requestFocus();
+                    }
+                  },
+                  style: TextStyle(
+                    fontSize: 19,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    height: 0.5,
+                  ),
                   obscureText: isPassword,
+                  cursorColor: Colors.white,
                   readOnly: widget.isReadOnly,
-                  // decoration:
-                  // InputDecoration.collapsed(hintText: widget.placeholder),
                   decoration: InputDecoration(
-                    // contentPadding: EdgeInsets.only(top: 10),
-                    hintText: widget.placeholder,
-                    border: InputBorder.none,
-                    labelStyle:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                    hintStyle:
-                        TextStyle(fontSize: widget.smallVersion ? 12 : 15),
-                    // suffix:
+                    // labelText: widget.label,
+                    // contentPadding:
+                    //     EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    labelText: widget.label,
+                    labelStyle: TextStyle(
+                      fontSize: 19,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      // height: ,
+                    ),
+                    fillColor: Colors.white,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white.withOpacity(0.9),
+                      ),
+                    ),
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
-              widget.suffix ??
-                  GestureDetector(
-                    onTap: () => setState(() {
-                      isPassword = !isPassword;
-                    }),
-                    child: widget.password
-                        ? Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            child: Icon(
-                              isPassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.grey,
-                              size: 20,
-                            ),
-                          )
-                        : Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                          ),
-                  ),
+              widget.suffix,
             ],
           ),
         ),
@@ -155,6 +145,7 @@ class _InputFieldState extends State<InputField> {
         (widget.additionalNote != null)
             ? NoteText(widget.additionalNote)
             : SizedBox(),
+        verticalSpaceSmall
       ],
     );
   }
