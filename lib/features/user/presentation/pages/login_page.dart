@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hagglex/core/navigations/route_paths.dart';
 import 'package:hagglex/core/share_ui/shared/app_colors.dart';
 import 'package:hagglex/core/share_ui/shared/input_field.dart';
 import 'package:hagglex/core/share_ui/shared/touachable_opacity.dart';
@@ -82,12 +83,20 @@ class _LoginPageState extends State<LoginPage> {
               ),
               verticalSpace(33),
               Center(
-                child: Text(
-                  'New User? Create a new account',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
+                child: TouchableOpacity(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.selectCountryPage,
+                    );
+                  },
+                  child: Text(
+                    'New User? Create a new account',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ),
               ),

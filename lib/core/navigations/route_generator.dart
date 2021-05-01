@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hagglex/core/navigations/route_paths.dart';
 import 'package:hagglex/features/user/presentation/pages/login_page.dart';
+import 'package:hagglex/features/user/presentation/pages/select_country_page.dart';
 import 'package:hagglex/features/user/presentation/pages/startup_page.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -14,6 +15,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: LoginPage(),
+      );
+    case Routes.selectCountryPage:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: SelectCountryPage(),
       );
 
     default:
@@ -29,8 +35,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
 PageRoute _getPageRoute({String routeName, Widget viewToShow}) {
   return MaterialPageRoute(
-      settings: RouteSettings(
-        name: routeName,
-      ),
-      builder: (_) => viewToShow);
+    settings: RouteSettings(
+      name: routeName,
+    ),
+    builder: (_) => viewToShow,
+  );
 }
