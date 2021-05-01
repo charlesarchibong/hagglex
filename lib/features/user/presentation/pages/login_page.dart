@@ -20,12 +20,14 @@ class _LoginPageState extends State<LoginPage> {
             horizontal: 35,
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Welcome!',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 27,
+                  fontSize: 50,
                   fontWeight: FontWeight.w900,
                 ),
               )
