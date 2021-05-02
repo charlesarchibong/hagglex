@@ -22,6 +22,8 @@ class InputField extends StatefulWidget {
   final int maxLines, maxLength;
   final Widget suffix;
   final Widget prefix;
+  final Color color;
+  final Color labelTextColor;
 
   InputField({
     @required this.controller,
@@ -42,6 +44,8 @@ class InputField extends StatefulWidget {
     this.smallVersion = true,
     this.suffix = const SizedBox(),
     this.prefix,
+    this.color = Colors.white,
+    this.labelTextColor = Colors.white,
   });
 
   @override
@@ -96,12 +100,12 @@ class _InputFieldState extends State<InputField> {
                   },
                   style: TextStyle(
                     fontSize: 19,
-                    color: Colors.white,
+                    color: widget.color,
                     fontWeight: FontWeight.w500,
                     height: 0.5,
                   ),
                   obscureText: isPassword,
-                  cursorColor: Colors.white,
+                  cursorColor: widget.color,
                   readOnly: widget.isReadOnly,
                   decoration: InputDecoration(
                     // labelText: widget.label,
@@ -110,22 +114,24 @@ class _InputFieldState extends State<InputField> {
                     labelText: widget.label,
                     labelStyle: TextStyle(
                       fontSize: 19,
-                      color: Colors.white,
+                      color: widget.labelTextColor == widget.color
+                          ? widget.color
+                          : widget.labelTextColor,
                       fontWeight: FontWeight.w500,
                       // height: ,
                     ),
-                    fillColor: Colors.white,
+                    fillColor: widget.color,
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: widget.color),
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.white.withOpacity(0.9),
+                        color: widget.color.withOpacity(0.9),
                       ),
                     ),
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.white,
+                        color: widget.color,
                       ),
                     ),
                   ),

@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      Routes.selectCountryPage,
+                      Routes.signupPage,
                     );
                   },
                   child: Text(

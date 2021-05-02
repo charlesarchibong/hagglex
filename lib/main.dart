@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
           0xff2E1963,
           AppColors.colorScratch,
         ),
+        //TODO : Download fonts from google
         textTheme: GoogleFonts.darkerGrotesqueTextTheme(
           Theme.of(context).textTheme,
         ),

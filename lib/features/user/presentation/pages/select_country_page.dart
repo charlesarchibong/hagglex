@@ -37,6 +37,9 @@ class _SelectCountryPageState extends State<SelectCountryPage> {
                   children: List.generate(
                     50,
                     (index) => ListTile(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       leading: Container(
                         height: 50,
                         width: 40,
