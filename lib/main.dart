@@ -5,13 +5,24 @@ import 'package:hagglex/core/navigations/navigation_service.dart';
 import 'package:hagglex/core/navigations/route_generator.dart';
 import 'package:hagglex/core/navigations/route_paths.dart';
 import 'package:hagglex/core/share_ui/shared/app_colors.dart';
+import 'package:hagglex/features/user/presentation/providers/auth_provider.dart';
 import 'package:hagglex/injection_container.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
   await setupLocator();
 
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => sl<AuthProvider>(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

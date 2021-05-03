@@ -11,6 +11,11 @@ import 'package:hagglex/core/local_data/user_token/set_user_logged_in_token.dart
 import 'package:hagglex/core/navigations/navigation_service.dart';
 import 'package:hagglex/core/network/graph_client.dart';
 import 'package:hagglex/core/network/network_info.dart';
+import 'package:hagglex/features/user/data/datasources/remote_datasource.dart';
+import 'package:hagglex/features/user/data/repositories/user_repository_impl.dart';
+import 'package:hagglex/features/user/domain/repositories/user_repository.dart';
+import 'package:hagglex/features/user/domain/usecases/register_usecase.dart';
+import 'package:hagglex/features/user/presentation/providers/auth_provider.dart';
 
 import 'core/local_data/user_data/get_loggedin_user_data.dart';
 import 'core/local_data/user_data/save_loggedin_user_data.dart';
@@ -90,16 +95,40 @@ Future<void> setupLocator() async {
   );
 
   //******************* Usecases *************************
-  //
-  //
+
+  sl.registerLazySingleton(
+    () => RegisterUsecase(
+      userRepository: sl(),
+    ),
+  );
 
   //******************* Data sources *************************
-  //
+  sl.registerLazySingleton<UserRemoteDatasource>(
+    () => UserRemoteDatasourceImpl(
+      networkInfo: sl(),
+      graphQLClientConc: sl(),
+      saveLoggedInUserData: sl(),
+      saveLoggedInUserToken: sl(),
+      getLoggedInUserToken: sl(),
+    ),
+  );
 
   //******************* Repositories *************************
+  sl.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(
+      sl(),
+    ),
+  );
 
   //******************* Providers *************************
+  sl.registerLazySingleton(
+    () => AuthProvider(
+      registerUsecase: sl(),
+    ),
+  );
 
   //******************* Services *************************
-  sl.registerLazySingleton(() => NavigationService());
+  sl.registerLazySingleton(
+    () => NavigationService(),
+  );
 }
