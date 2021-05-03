@@ -36,7 +36,7 @@ class UserRepositoryImpl implements UserRepository {
       } else if (e is OperationException) {
         return Left(
           ServerFailure(
-            message: e.toString(),
+            message: e.graphqlErrors[0].message,
           ),
         );
       } else {

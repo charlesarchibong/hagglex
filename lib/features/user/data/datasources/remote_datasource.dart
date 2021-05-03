@@ -8,6 +8,7 @@ import 'package:hagglex/core/network/graph_client.dart';
 import 'package:hagglex/core/network/network_info.dart';
 import 'package:hagglex/core/network/queries/mutation/mutation.dart' as mutaion;
 import 'package:hagglex/features/user/data/models/user_model.dart';
+import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 // ignore: one_member_abstracts
@@ -45,6 +46,9 @@ class UserRemoteDatasourceImpl implements UserRemoteDatasource {
     String referralCode,
   }) async {
     if (await networkInfo.isConnected) {
+      Logger().i(
+        '0$phone',
+      );
       final _options = MutationOptions(
         document: parseString(mutaion.registerQuery),
         variables: <String, dynamic>{
@@ -54,20 +58,26 @@ class UserRemoteDatasourceImpl implements UserRemoteDatasource {
             'email': email,
             'currency': 'NGN',
             'country': 'Nigeria',
-            'phonenumber': phone,
+            'phonenumber': '0$phone',
           },
         },
       );
 
       var queryResult = await graphQLClientConc.mutate(_options);
+      if (queryResult.hasException) {
+        throw queryResult.exception;
+      }
+      Logger().i(queryResult.data);
+      Logger().i(queryResult);
       var user = UserModel.fromMap(
-        queryResult.data['data']['register']['user'],
+        queryResult.data['register']['user'],
       );
+
       await saveLoggedInUserData(
         user,
       );
       await saveLoggedInUserToken(
-        queryResult.data['data']['register']['token'],
+        queryResult.data['register']['token'],
       );
       return user;
     } else {

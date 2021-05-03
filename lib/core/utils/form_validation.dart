@@ -33,87 +33,87 @@ class CustomFormValidation {
   }
 
   static String errorEmailMessage(String text, String message, [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (EmailValidator.validEmail(text) == false) {
       return 'Email must be a valid email address';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessage(String text, String message, [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessagePassword(String text, String message,
       [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length <= 7) {
       return 'Password must have 8 or more characters';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessageAccount(String text, String message,
       [String type]) {
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length <= 9) {
       return 'Account number must have 10 characters';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorPhoneNumber(String text, String message, [String type]) {
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length < 10 || text.length > 10) {
       return 'Phone number must have 10 characters';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorPhoneNumber2(String text, String message, [String type]) {
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length < 11 || text.length > 11) {
       return 'Phone number must have 11 characters';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorPhoneNumberLogin(String text, String message,
       [String type]) {
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (!text.startsWith('0')) {
@@ -123,22 +123,22 @@ class CustomFormValidation {
       if (text.length < 9) {
         return 'Phone numner too short.';
       } else {
-        return '';
+        return null;
       }
     } else if (text.startsWith('0') && (text.length < 11 || text.length > 11)) {
       return 'Phone number must have 11 characters';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessageConfirmPassword(
       String text, String message, String password,
       [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length <= 7) {
@@ -146,45 +146,45 @@ class CustomFormValidation {
     } else if (text != password) {
       return 'Confirmation password must match password';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessagePin(String text, String message, [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length != 4) {
       return 'Pin must have 4 characters';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessagePin2(String text, String message, [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length != 6) {
       return 'OTP must have 6 characters';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessageConfirmPin(
       String text, String message, String password,
       [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length <= 3) {
@@ -192,21 +192,21 @@ class CustomFormValidation {
     } else if (text != password) {
       return 'Confirmation pin must match pin';
     } else {
-      return '';
+      return null;
     }
   }
 
   static String errorMessageBvn(String text, String message, [String type]) {
-    // var text = text ? '' : message;
+    // var text = text ? null : message;
     // return text;
     if (text == null) {
-      return '';
+      return null;
     } else if (text.isEmpty) {
       return message;
     } else if (text.length != 11) {
       return 'Please enter a valid BVN';
     } else {
-      return '';
+      return null;
     }
   }
 }

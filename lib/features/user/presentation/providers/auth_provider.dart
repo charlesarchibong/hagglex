@@ -33,6 +33,7 @@ class AuthProvider extends ChangeNotifier {
         FlushBarNotification.showErrorMessage(
           context: context,
           message: FailureToMessage.mapFailureToMessage(l),
+          title: 'Error',
         );
       },
       (r) {

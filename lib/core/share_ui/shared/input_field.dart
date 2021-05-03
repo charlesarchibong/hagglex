@@ -111,6 +111,7 @@ class _InputFieldState extends State<InputField> {
                     // labelText: widget.label,
                     // contentPadding:
                     //     EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    errorText: widget.validationMessage,
                     labelText: widget.label,
                     labelStyle: TextStyle(
                       fontSize: 19,
@@ -141,12 +142,6 @@ class _InputFieldState extends State<InputField> {
             ],
           ),
         ),
-        (widget.validationMessage != null)
-            ? NoteText(
-                widget.validationMessage,
-                color: Colors.red,
-              )
-            : SizedBox(),
         (widget.additionalNote != null) ? verticalSpace(5) : SizedBox(),
         (widget.additionalNote != null)
             ? NoteText(widget.additionalNote)
