@@ -157,8 +157,8 @@ class CustomFormValidation {
       return null;
     } else if (text.isEmpty) {
       return message;
-    } else if (text.length != 4) {
-      return 'Pin must have 4 characters';
+    } else if (text.length != 6) {
+      return 'Pin must have 6 characters';
     } else {
       return null;
     }

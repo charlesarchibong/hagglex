@@ -1,12 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hagglex/core/constants/app_assets.dart';
-import 'package:hagglex/core/navigations/route_paths.dart';
 import 'package:hagglex/core/share_ui/shared/app_colors.dart';
 import 'package:hagglex/core/share_ui/shared/custom_back_button.dart';
 import 'package:hagglex/core/share_ui/shared/input_field.dart';
 import 'package:hagglex/core/share_ui/shared/touachable_opacity.dart';
 import 'package:hagglex/core/share_ui/shared/ui_helpers.dart';
+import 'package:hagglex/core/utils/form_validation.dart';
+import 'package:hagglex/features/user/presentation/providers/auth_provider.dart';
 import 'package:hagglex/features/user/presentation/widgets/hagglex_app_backgroun_widget.dart';
+import 'package:logger/logger.dart';
+
+import '../../../../injection_container.dart';
 
 class AccountVerificationPage extends StatefulWidget {
   AccountVerificationPage({Key key}) : super(key: key);
@@ -17,6 +23,26 @@ class AccountVerificationPage extends StatefulWidget {
 }
 
 class _AccountVerificationPageState extends State<AccountVerificationPage> {
+  final _codeEditingController = TextEditingController();
+  StreamController<String> _otpStream;
+
+  final ValueNotifier<bool> _isLoading = ValueNotifier(false);
+
+  @override
+  void initState() {
+    super.initState();
+    _otpStream = StreamController<String>.broadcast();
+    _codeEditingController.addListener(() {
+      _otpStream.sink.add(_codeEditingController.text.trim());
+    });
+  }
+
+  @override
+  void dispose() {
+    _otpStream.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,43 +119,68 @@ class _AccountVerificationPageState extends State<AccountVerificationPage> {
                           textAlign: TextAlign.center,
                         ),
                         verticalSpace(5.5),
-                        InputField(
-                          controller: null,
-                          label: 'Verification code',
-                          color: Colors.black,
-                          labelTextColor: Colors.black,
-                          password: true,
+                        StreamBuilder<String>(
+                          stream: _otpStream.stream,
+                          builder: (context, snapshot) {
+                            return InputField(
+                              controller: _codeEditingController,
+                              label: 'Verification code',
+                              color: Colors.black,
+                              labelTextColor: Colors.black,
+                              password: true,
+                              validationMessage:
+                                  CustomFormValidation.errorMessagePin(
+                                snapshot?.data,
+                                'Code is required',
+                              ),
+                            );
+                          },
                         ),
                         verticalSpace(35.5),
                         TouchableOpacity(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.setupSuccessPage,
-                            );
+                          onTap: () async {
+                            if (validateForm()) {
+                              Logger().i('valid');
+
+                              _isLoading.value = true;
+                              await sl<AuthProvider>().verifyOtp(
+                                context: context,
+                                otp: _codeEditingController.text,
+                              );
+                              _isLoading.value = false;
+                            }
                           },
-                          child: Container(
-                            width: double.infinity,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xff432B7B),
-                                  Color(0xff6A4BBC),
-                                ],
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'VERIFY ME',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                          child: ValueListenableBuilder<bool>(
+                            valueListenable: _isLoading,
+                            builder: (context, loading, child) {
+                              return Container(
+                                width: double.infinity,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xff432B7B),
+                                      Color(0xff6A4BBC),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ),
+                                child: Center(
+                                  child: loading
+                                      ? CircularProgressIndicator(
+                                          backgroundColor: Colors.white,
+                                        )
+                                      : Text(
+                                          'VERIFY ME',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         verticalSpace(28),
@@ -143,15 +194,24 @@ class _AccountVerificationPageState extends State<AccountVerificationPage> {
                           textAlign: TextAlign.center,
                         ),
                         verticalSpace(49),
-                        Text(
-                          'Resend Code',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            decoration: TextDecoration.underline,
+                        TouchableOpacity(
+                          onTap: () async {
+                            _isLoading.value = true;
+                            await sl<AuthProvider>().resendOtp(
+                              context: context,
+                            );
+                            _isLoading.value = false;
+                          },
+                          child: Text(
+                            'Resend Code',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              decoration: TextDecoration.underline,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                         verticalSpace(65),
                       ],
@@ -164,5 +224,19 @@ class _AccountVerificationPageState extends State<AccountVerificationPage> {
         ),
       ),
     );
+  }
+
+  bool validateForm() {
+    var valid = true;
+    if (CustomFormValidation.errorMessagePin(
+            _codeEditingController.text, 'message') !=
+        null) {
+      _otpStream.sink.add(
+        _codeEditingController.text,
+      );
+      valid = false;
+    }
+
+    return valid;
   }
 }

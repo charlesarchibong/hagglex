@@ -102,12 +102,18 @@ class UserRemoteDatasourceImpl implements UserRemoteDatasource {
         document: parseString(mutaion.verifyAccountQuery),
         variables: <String, dynamic>{
           'input': {
-            'code': code,
+            'code': int.parse(code),
           },
         },
       );
 
-      var queryResult = await graphQLClientConc.mutate(_options);
+      var token = await getLoggedInUserToken();
+      var queryResult = await graphQLClientConc
+          .copyWith(
+              authLink: AuthLink(
+            getToken: () => 'Bearer $token',
+          ))
+          .mutate(_options);
       if (queryResult.hasException) {
         throw queryResult.exception;
       }
@@ -141,8 +147,14 @@ class UserRemoteDatasourceImpl implements UserRemoteDatasource {
           },
         },
       );
-
-      var queryResult = await graphQLClientConc.mutate(_options);
+      var token = await getLoggedInUserToken();
+      var queryResult = await graphQLClientConc
+          .copyWith(
+            authLink: AuthLink(
+              getToken: () => 'Bearer $token',
+            ),
+          )
+          .mutate(_options);
       if (queryResult.hasException) {
         throw queryResult.exception;
       }
@@ -158,6 +170,7 @@ class UserRemoteDatasourceImpl implements UserRemoteDatasource {
       await saveLoggedInUserToken(
         queryResult.data['login']['token'],
       );
+
       return user;
     } else {
       throw NoInternetException();
@@ -175,8 +188,13 @@ class UserRemoteDatasourceImpl implements UserRemoteDatasource {
           },
         },
       );
-
-      var queryResult = await graphQLClientConc.mutate(_options);
+      var token = await getLoggedInUserToken();
+      var queryResult = await graphQLClientConc
+          .copyWith(
+              authLink: AuthLink(
+            getToken: () => 'Bearer $token',
+          ))
+          .mutate(_options);
       if (queryResult.hasException) {
         throw queryResult.exception;
       }

@@ -14,4 +14,14 @@ class GraphQLClientConc extends GraphQLClient {
           ),
           link: authLink.concat(httpLink),
         );
+
+  GraphQLClientConc copyWith({
+    HttpLink httpLink,
+    AuthLink authLink,
+  }) {
+    return GraphQLClientConc(
+      httpLink: httpLink ?? this.httpLink,
+      authLink: authLink ?? this.authLink,
+    );
+  }
 }

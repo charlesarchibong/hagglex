@@ -142,6 +142,9 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton(
     () => AuthProvider(
       registerUsecase: sl(),
+      loginUsecase: sl(),
+      resendOtpUsecase: sl(),
+      verifyOtpUsecase: sl(),
     ),
   );
 

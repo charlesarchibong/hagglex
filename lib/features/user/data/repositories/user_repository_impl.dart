@@ -85,7 +85,9 @@ class UserRepositoryImpl implements UserRepository {
       } else if (e is OperationException) {
         return Left(
           ServerFailure(
-            message: e.graphqlErrors[0].message,
+            message: e.graphqlErrors.isNotEmpty
+                ? e.graphqlErrors[0].message
+                : 'Server error',
           ),
         );
       } else {
@@ -108,7 +110,9 @@ class UserRepositoryImpl implements UserRepository {
       } else if (e is OperationException) {
         return Left(
           ServerFailure(
-            message: e.graphqlErrors[0].message,
+            message: e.graphqlErrors.isNotEmpty
+                ? e.graphqlErrors[0].message
+                : 'Server error',
           ),
         );
       } else {

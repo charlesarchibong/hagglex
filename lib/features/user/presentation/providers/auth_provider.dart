@@ -123,7 +123,7 @@ class AuthProvider extends ChangeNotifier {
       (r) {
         Navigator.pushNamed(
           context,
-          Routes.dashboardPage,
+          Routes.setupSuccessPage,
         );
       },
     );
