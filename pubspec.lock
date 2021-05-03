@@ -176,13 +176,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.4"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.0"
   equatable:
     dependency: "direct main"
     description:
@@ -254,13 +247,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  gap:
-    dependency: "direct main"
-    description:
-      name: gap
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0"
   get_it:
     dependency: "direct main"
     description:
