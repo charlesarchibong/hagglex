@@ -3,4 +3,5 @@ class Routes {
   static const String loginPage = '/login';
   static const String selectCountryPage = '/select_country';
   static const String signupPage = '/sign_up';
+  static const String accountVerificationPage = '/account_verification_page';
 }

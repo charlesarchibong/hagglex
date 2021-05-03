@@ -170,25 +170,33 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
                         verticalSpace(44),
-                        Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xff432B7B),
-                                Color(0xff6A4BBC),
-                              ],
+                        TouchableOpacity(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.accountVerificationPage,
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xff432B7B),
+                                  Color(0xff6A4BBC),
+                                ],
+                              ),
                             ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'SIGN UP',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                            child: Center(
+                              child: Text(
+                                'SIGN UP',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
