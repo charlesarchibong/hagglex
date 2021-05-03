@@ -13,7 +13,7 @@
 - GraphQL
 
 ## Architecture
- - Clean architecture with Test Driven Design (TDD)
+ - Clean architecture
 
 ## Developer
 ### Charles Archibong

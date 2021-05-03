@@ -1,13 +1,16 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:hagglex/core/constants/env_constants.dart';
 import 'package:hagglex/core/local_data/user_data/delete_user_session.dart';
 import 'package:hagglex/core/local_data/user_token/get_user_logged_in_token.dart';
 import 'package:hagglex/core/local_data/user_token/set_user_logged_in_token.dart';
 import 'package:hagglex/core/navigations/navigation_service.dart';
-import 'package:hagglex/core/network/http_requester.dart';
+import 'package:hagglex/core/network/graph_client.dart';
 import 'package:hagglex/core/network/network_info.dart';
 
 import 'core/local_data/user_data/get_loggedin_user_data.dart';
@@ -25,12 +28,6 @@ Future<void> setupLocator() async {
   //       CacheConfig(),
   //     ));
   final storage = FlutterSecureStorage();
-
-  sl.registerLazySingleton(
-    () => HttpServiceRequester(
-      dio: sl(),
-    ),
-  );
 
   sl.registerLazySingleton(
     () => Connectivity(),
@@ -63,6 +60,16 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton<SaveRefreshToken>(
     () => SaveRefreshTokenImpl(
       storage,
+    ),
+  );
+  sl.registerLazySingleton(
+    () => GraphQLClientConc(
+      authLink: AuthLink(
+        getToken: () => '',
+      ),
+      httpLink: HttpLink(
+        env[baseUrlEnv],
+      ),
     ),
   );
 

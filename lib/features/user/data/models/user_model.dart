@@ -23,7 +23,7 @@ class UserModel extends UserEntity {
     return {
       'email': email,
       'username': username,
-      'phone': phone,
+      'phonenumber': phone,
     };
   }
 
@@ -31,7 +31,7 @@ class UserModel extends UserEntity {
     return UserModel(
       email: map['email'],
       username: map['username'],
-      phone: map['phone'],
+      phone: map['phonenumber'],
     );
   }
 
