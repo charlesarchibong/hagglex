@@ -3,6 +3,7 @@ import 'package:hagglex/core/navigations/route_paths.dart';
 import 'package:hagglex/features/user/presentation/pages/account_verification_page.dart';
 import 'package:hagglex/features/user/presentation/pages/login_page.dart';
 import 'package:hagglex/features/user/presentation/pages/select_country_page.dart';
+import 'package:hagglex/features/user/presentation/pages/setup_complete_page.dart';
 import 'package:hagglex/features/user/presentation/pages/signup_page.dart';
 import 'package:hagglex/features/user/presentation/pages/startup_page.dart';
 
@@ -27,6 +28,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: SignupPage(),
+      );
+    case Routes.setupSuccessPage:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: SetupCompletePage(),
       );
     case Routes.accountVerificationPage:
       return _getPageRoute(

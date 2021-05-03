@@ -105,7 +105,7 @@ class _AccountVerificationPageState extends State<AccountVerificationPage> {
                           onTap: () {
                             Navigator.pushNamed(
                               context,
-                              Routes.accountVerificationPage,
+                              Routes.setupSuccessPage,
                             );
                           },
                           child: Container(
@@ -122,7 +122,7 @@ class _AccountVerificationPageState extends State<AccountVerificationPage> {
                             ),
                             child: Center(
                               child: Text(
-                                'SIGN UP',
+                                'VERIFY ME',
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,

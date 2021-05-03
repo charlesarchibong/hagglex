@@ -4,6 +4,7 @@ import 'package:hagglex/core/share_ui/shared/app_colors.dart';
 import 'package:hagglex/core/share_ui/shared/input_field.dart';
 import 'package:hagglex/core/share_ui/shared/touachable_opacity.dart';
 import 'package:hagglex/core/share_ui/shared/ui_helpers.dart';
+import 'package:hagglex/features/user/presentation/widgets/gold_button_widget.dart';
 import 'package:hagglex/features/user/presentation/widgets/hagglex_app_backgroun_widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -60,26 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               verticalSpace(44),
-              TouchableOpacity(
-                onTap: () {},
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Color(0xffFFC175),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'LOG IN',
-                      style: TextStyle(
-                        color: Color(0xff3E0606),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ),
-                ),
+              GoldButton(
+                onTap: null,
+                title: 'LOG IN',
               ),
               verticalSpace(33),
               Center(
