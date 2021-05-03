@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hagglex/core/navigations/route_paths.dart';
 import 'package:hagglex/features/user/presentation/pages/account_verification_page.dart';
+import 'package:hagglex/features/user/presentation/pages/dashboard_page.dart';
 import 'package:hagglex/features/user/presentation/pages/login_page.dart';
 import 'package:hagglex/features/user/presentation/pages/select_country_page.dart';
 import 'package:hagglex/features/user/presentation/pages/setup_complete_page.dart';
@@ -23,6 +24,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: SelectCountryPage(),
+      );
+    case Routes.dashboardPage:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: DashboardPage(),
       );
     case Routes.signupPage:
       return _getPageRoute(

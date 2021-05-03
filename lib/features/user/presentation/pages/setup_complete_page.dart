@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hagglex/core/constants/app_assets.dart';
+import 'package:hagglex/core/navigations/route_paths.dart';
 import 'package:hagglex/core/share_ui/shared/app_colors.dart';
 import 'package:hagglex/core/share_ui/shared/ui_helpers.dart';
 import 'package:hagglex/features/user/presentation/widgets/gold_button_widget.dart';
@@ -53,7 +54,12 @@ class _SetupCompletePageState extends State<SetupCompletePage> {
                 horizontal: 36,
               ),
               child: GoldButton(
-                onTap: null,
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.dashboardPage,
+                  );
+                },
                 title: 'start exploring'.toUpperCase(),
               ),
             ),

@@ -5,4 +5,5 @@ class Routes {
   static const String signupPage = '/sign_up';
   static const String accountVerificationPage = '/account_verification_page';
   static const String setupSuccessPage = '/setup_success_page';
+  static const String dashboardPage = '/dashboard_page';
 }
