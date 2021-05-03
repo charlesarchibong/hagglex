@@ -14,7 +14,10 @@ import 'package:hagglex/core/network/network_info.dart';
 import 'package:hagglex/features/user/data/datasources/remote_datasource.dart';
 import 'package:hagglex/features/user/data/repositories/user_repository_impl.dart';
 import 'package:hagglex/features/user/domain/repositories/user_repository.dart';
+import 'package:hagglex/features/user/domain/usecases/login_usecase.dart';
 import 'package:hagglex/features/user/domain/usecases/register_usecase.dart';
+import 'package:hagglex/features/user/domain/usecases/resend_otp_usecase.dart';
+import 'package:hagglex/features/user/domain/usecases/verify_otp_usecase.dart';
 import 'package:hagglex/features/user/presentation/providers/auth_provider.dart';
 
 import 'core/local_data/user_data/get_loggedin_user_data.dart';
@@ -98,6 +101,21 @@ Future<void> setupLocator() async {
 
   sl.registerLazySingleton(
     () => RegisterUsecase(
+      userRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => LoginUsecase(
+      userRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => ResendOtpUsecase(
+      userRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => VerifyOtpUsecase(
       userRepository: sl(),
     ),
   );
