@@ -20,6 +20,16 @@ abstract class UserRemoteDatasource {
     @required String phone,
     String referralCode,
   });
+  Future<UserModel> verifyUser({
+    @required String code,
+  });
+  Future<bool> resendVerificationCode({
+    @required String email,
+  });
+  Future<UserModel> login({
+    @required String email,
+    @required String password,
+  });
 }
 
 class UserRemoteDatasourceImpl implements UserRemoteDatasource {
@@ -80,6 +90,100 @@ class UserRemoteDatasourceImpl implements UserRemoteDatasource {
         queryResult.data['register']['token'],
       );
       return user;
+    } else {
+      throw NoInternetException();
+    }
+  }
+
+  @override
+  Future<UserModel> verifyUser({String code}) async {
+    if (await networkInfo.isConnected) {
+      final _options = MutationOptions(
+        document: parseString(mutaion.verifyAccountQuery),
+        variables: <String, dynamic>{
+          'input': {
+            'code': code,
+          },
+        },
+      );
+
+      var queryResult = await graphQLClientConc.mutate(_options);
+      if (queryResult.hasException) {
+        throw queryResult.exception;
+      }
+      Logger().i(queryResult.data);
+      Logger().i(queryResult);
+      var user = UserModel.fromMap(
+        queryResult.data['verifyUser']['user'],
+      );
+
+      await saveLoggedInUserData(
+        user,
+      );
+      await saveLoggedInUserToken(
+        queryResult.data['verifyUser']['token'],
+      );
+      return user;
+    } else {
+      throw NoInternetException();
+    }
+  }
+
+  @override
+  Future<UserModel> login({String email, String password}) async {
+    if (await networkInfo.isConnected) {
+      final _options = MutationOptions(
+        document: parseString(mutaion.loginQuery),
+        variables: <String, dynamic>{
+          'input': {
+            'input': email,
+            'password': password,
+          },
+        },
+      );
+
+      var queryResult = await graphQLClientConc.mutate(_options);
+      if (queryResult.hasException) {
+        throw queryResult.exception;
+      }
+      Logger().i(queryResult.data);
+      Logger().i(queryResult);
+      var user = UserModel.fromMap(
+        queryResult.data['login']['user'],
+      );
+
+      await saveLoggedInUserData(
+        user,
+      );
+      await saveLoggedInUserToken(
+        queryResult.data['login']['token'],
+      );
+      return user;
+    } else {
+      throw NoInternetException();
+    }
+  }
+
+  @override
+  Future<bool> resendVerificationCode({String email}) async {
+    if (await networkInfo.isConnected) {
+      final _options = MutationOptions(
+        document: parseString(mutaion.resentCodeQuery),
+        variables: <String, dynamic>{
+          'input': {
+            'email': email,
+          },
+        },
+      );
+
+      var queryResult = await graphQLClientConc.mutate(_options);
+      if (queryResult.hasException) {
+        throw queryResult.exception;
+      }
+      Logger().i(queryResult.data);
+      Logger().i(queryResult);
+
+      return queryResult.data['resendVerificationCode']['done'];
     } else {
       throw NoInternetException();
     }
