@@ -1,6 +1,5 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -31,10 +30,6 @@ Future<void> setupLocator() async {
 
   sl.registerLazySingleton(
     () => Connectivity(),
-  );
-
-  sl.registerLazySingleton(
-    () => Dio(),
   );
 
   sl.registerLazySingleton<NetworkInfo>(
