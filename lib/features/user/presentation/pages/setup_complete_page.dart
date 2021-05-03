@@ -49,7 +49,7 @@ class _SetupCompletePageState extends State<SetupCompletePage> {
             verticalSpaceMassive,
             verticalSpaceSmall,
             Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: 36,
               ),
               child: GoldButton(
