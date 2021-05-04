@@ -3,6 +3,14 @@
 [HaggleX](https://www.hagglex.com/) - Recreated Flutter Application
 
 
+## Usage
+
+Create a .env file in this project root folder and declare your GraphQL base url using this pattern below;
+
+BASE_URL=https://sample_base_url.com
+
+and the file and try running the app on your computer.
+
 ## Features
 - Login and Logout
 - Register
