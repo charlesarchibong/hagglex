@@ -30,7 +30,9 @@ and the file and try running the app on your computer.
 - [GitHub](https://github.com/charlesarchibong/)
 
 
-**Screenshots**
+### **Screenshots**
+
+
 <img src="screenshots/1.png"  width="300"/>
 
 <img src="screenshots/2.png"  width="300"/>
