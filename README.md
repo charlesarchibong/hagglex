@@ -25,7 +25,7 @@ and the file and try running the app on your computer.
 
 ## Developer
 ### Charles Archibong
-- [contact@charlesarchibong.dev](mailto:contact@charlesarchibong.dev)
+- [info@charlesarchibong.com](mailto:info@charlesarchibong.com)
 - [LinkedIn](https://www.linkedin.com/in/charles-archibong)
 - [GitHub](https://github.com/charlesarchibong/)
 
